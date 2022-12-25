@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dany.pratama.data_master">
    <application
-        android:label="data_master"
+        android:label="Data Master"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
