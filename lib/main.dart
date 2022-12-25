@@ -1,5 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:data_master/pages/shared/master.dart';
+import 'package:data_master/pages/master/home.dart';
+import 'package:data_master/pages/master/master.dart';
+import 'package:data_master/pages/shared/splash.dart';
 import 'package:data_master/providers/provider.dart';
 import 'package:data_master/shared/theme.dart';
 import 'package:data_master/shared/variables.dart';
@@ -227,7 +229,9 @@ class MyApp extends StatelessWidget {
           darkTheme: dark,
           initialRoute: mainRoute,
           routes: {
-            mainRoute: (context) => MasterPage(),
+            mainRoute: (context) => SplashPage(),
+            homeRoute: (context) => HomePage(),
+            masterRoute: (context) => MasterPage(),
           },
           debugShowCheckedModeBanner: false,
         ),

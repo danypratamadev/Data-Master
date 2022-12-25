@@ -1,4 +1,5 @@
 const String mainRoute = '/';
+const String homeRoute = '/home';
 const String masterRoute = '/master';
 
 const double appBarSize = 50.0;
