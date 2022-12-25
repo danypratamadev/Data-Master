@@ -2,9 +2,12 @@ import 'dart:io';
 import 'package:data_master/interface/dialog-ui/dialog.dart';
 import 'package:data_master/interface/texts-ui/headline3.dart';
 import 'package:data_master/models/mmaster_data.dart';
+import 'package:data_master/models/mmenu.dart';
+import 'package:data_master/shared/theme.dart';
 import 'package:data_master/shared/variables.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MainProvider extends ChangeNotifier {
 
@@ -15,11 +18,9 @@ class MainProvider extends ChangeNotifier {
   bool showCardShadow = true;
   bool showCardBorder = false;
 
+  List<MenuModel> listMainMenu = <MenuModel>[];
+
   //! GLOBAL METHOD ****************************************************************************
-  onRefresh({required BuildContext context, required int action}){
-
-  }
-
   //? PUSH ROUTE METHOD
   pushRoute({required BuildContext context, required String route, bool passData = false, Map<String, dynamic> argument = const {'name': 'data'}}){
     if(passData){
@@ -46,6 +47,37 @@ class MainProvider extends ChangeNotifier {
       Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
     }
   }
+
+  onRefresh({required BuildContext context, required int action}){
+
+  }
+
+  setupaMainMenu(){
+    listMainMenu.clear();
+
+    MenuModel menu = MenuModel(icon: Iconsax.folder, iconColor: lightAccentBlue, title: 'Data Master', action: 10);
+    MenuModel menu2 = MenuModel(icon: Iconsax.edit, iconColor: lightAccentOrange, title: 'Input Data', action: 20);
+    MenuModel menu3 = MenuModel(icon: Iconsax.export_1, iconColor: lightAccentPurple, title: 'Export Data', action: 30);
+
+    listMainMenu.add(menu);
+    listMainMenu.add(menu2);
+    listMainMenu.add(menu3);
+  }
+
+  onClickMainMenu({required BuildContext context, required int action}){
+    switch(action){
+      case 10:
+        pushRoute(context: context, route: masterRoute);
+      break;
+      case 20:
+        // pushRoute(context: context, route: route);
+      break;
+      case 30:
+        // pushRoute(context: context, route: route);
+      break;
+    }
+  }
+
 
   //? ALERT DIALOG METHOD
   showAlertDialogApp({required BuildContext context, required String title, required String message, required bool dismissible, required List<CupertinoButton> action}){

@@ -21,43 +21,47 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: AppScrollPage(
         title: 'Beranda', 
-        largeTitle: Headline1Text(label: 'Beranda'), 
-        showLeading: true,
-        leadingWidget: IconButton(
-          icon: Icon(
-            Icons.close_rounded,
-          ),
-          onPressed: (){
-            Navigator.pop(context);
-          }, 
-        ),
+        largeTitle: Headline1Text(label: 'Beranda'),
+        expandedHeight: sizedBox55,
         body: [
-          RoundedCard(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: (){
-                  mainProvider.pushRoute(context: context, route: masterRoute);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: secondaryPaddingSize, vertical: tertiaryPaddingSize),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Iconsax.folder,
-                        size: secondaryAvatarSize,
-                        color: themeApp.primaryColor,
+          Consumer<MainProvider>(
+            builder: (contextt, value, child) => GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              crossAxisSpacing: tertiaryPaddingSize,
+              mainAxisSpacing: tertiaryPaddingSize,
+              physics: NeverScrollableScrollPhysics(),
+              children: value.listMainMenu.map((menu) => RoundedCard(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: (){
+                      mainProvider.onClickMainMenu(context: context, action: menu.action);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: secondaryPaddingSize, vertical: secondaryPaddingSize),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            menu.icon,
+                            size: secondaryAvatarSize,
+                            color: menu.iconColor,
+                          ),
+                          SizedBox(height: smallPaddingSize,),
+                          TitleText(
+                            label: menu.title
+                          ),
+                        ],
                       ),
-                      SizedBox(height: smallPaddingSize,),
-                      TitleText(
-                        label: 'Data Master'
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            )
-          )
+                )
+              )).toList(),
+            ),
+          ),
         ]
       ),
     );

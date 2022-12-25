@@ -22,6 +22,7 @@ class SplashPage extends StatelessWidget {
 
     if(limitReq == 0){
       Timer(Duration(milliseconds: 1500), (){
+        mainProvider.setupaMainMenu();
         mainProvider.pushReplacementRoute(context: context, route: homeRoute);
       });
       limitReq++;
